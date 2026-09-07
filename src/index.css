@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+
+  html { background: #07111f; scroll-behavior: smooth; }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background:
+      radial-gradient(900px 500px at 4% -10%, rgba(37, 99, 235, .22), transparent 62%),
+      radial-gradient(800px 480px at 96% 4%, rgba(14, 116, 144, .13), transparent 60%),
+      #07111f;
+    color: hsl(var(--foreground));
+  }
+
+  button, input, select, textarea { font: inherit; }
+  button, a, input, select, textarea { touch-action: manipulation; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid rgba(96, 165, 250, .9);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .app-shell { min-height: 100vh; isolation: isolate; }
+  .app-main { width: min(100%, 1440px); margin-inline: auto; padding: 2rem max(1rem, env(safe-area-inset-right)) 7rem max(1rem, env(safe-area-inset-left)); }
+  .glass-panel { background: rgba(15, 23, 42, .72); border: 1px solid rgba(148, 163, 184, .14); box-shadow: 0 18px 50px rgba(0, 0, 0, .22); backdrop-filter: blur(18px); }
+  .status-hud { top: max(1rem, env(safe-area-inset-top)); right: max(1rem, env(safe-area-inset-right)); }
+  .floating-sos { bottom: max(1rem, env(safe-area-inset-bottom)); right: max(1rem, env(safe-area-inset-right)); }
+}
+
+@media (max-width: 640px) {
+  .app-main { padding-top: 5rem; padding-bottom: 9rem; }
+  .status-hud { left: 1rem; right: 1rem; justify-content: space-between; pointer-events: none; }
+  .status-hud > * { pointer-events: auto; }
+  .floating-sos { right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); transform: scale(.86); transform-origin: bottom right; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+/* The application uses Tailwind utility colors extensively. These scoped token
+   overrides provide a complete, readable light surface without duplicating views. */
+[data-theme='light'] {
+  color-scheme: light;
+  color: #0f172a;
+  background:
+    radial-gradient(900px 520px at 0% -10%, rgba(96, 165, 250, .20), transparent 62%),
+    radial-gradient(760px 480px at 100% 0%, rgba(45, 212, 191, .12), transparent 58%), #f5f8fc;
+}
+[data-theme='light'] .bg-slate-950 { background-color: #f8fafc !important; }
+[data-theme='light'] .bg-slate-950\/90, [data-theme='light'] .bg-slate-950\/95 { background-color: rgba(248,250,252,.95) !important; }
+[data-theme='light'] .bg-slate-900, [data-theme='light'] .bg-slate-900\/95 { background-color: #ffffff !important; }
+[data-theme='light'] .bg-slate-800, [data-theme='light'] .bg-slate-800\/80, [data-theme='light'] .bg-slate-800\/70 { background-color: #eef3f9 !important; }
+[data-theme='light'] .bg-slate-700 { background-color: #dce5f0 !important; }
+[data-theme='light'] .text-white, [data-theme='light'] .text-slate-100 { color: #10213b !important; }
+[data-theme='light'] .text-slate-200, [data-theme='light'] .text-slate-300 { color: #334155 !important; }
+[data-theme='light'] .text-slate-400, [data-theme='light'] .text-slate-500 { color: #64748b !important; }
+[data-theme='light'] .border-slate-950, [data-theme='light'] .border-slate-900, [data-theme='light'] .border-slate-800, [data-theme='light'] .border-slate-700 { border-color: #d8e1ec !important; }
+[data-theme='light'] .glass-panel { background: rgba(255,255,255,.78); border-color: rgba(100,116,139,.18); box-shadow: 0 18px 50px rgba(15,23,42,.10); }
+[data-theme='light'] input, [data-theme='light'] textarea { color: #0f172a !important; }
